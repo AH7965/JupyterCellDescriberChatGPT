@@ -1,5 +1,6 @@
 import openai
 import re
+import __main__
 
 
 class CellNotFoundError(Exception):
@@ -51,8 +52,11 @@ class JupyterCellDescriberChatGPT:
             CellNotFoundError: If the specified cell cannot be found.
 
         """
-        _globals = globals()
+
+        _globals = vars(__main__)
+
         keys = set([k for k in _globals.keys() if re.match("^_i[0-9]+$", k)])
+
         if number == -1:
             number = max([int(k.split("i")[-1]) for k in keys])-1
 
