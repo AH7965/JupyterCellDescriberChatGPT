@@ -1,4 +1,6 @@
 import openai
+import re
+
 
 class CellNotFoundError(Exception):
     """
